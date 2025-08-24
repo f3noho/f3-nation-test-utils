@@ -2,15 +2,26 @@
 
 uv-sync = "uv sync --all-groups"
 
+comment-pytest-entry = 'sed -i "/^\[project.entry-points.pytest11\]/,/^$/ s/^/#/" pyproject.toml'
+restore-pytest-entry = 'sed -i "/^#\[project.entry-points.pytest11\]/,/^$/ s/^#//" pyproject.toml'
+
 check-python = 'tb check python'
 check-types = 'tb check basedpyright'
 check-complexity = 'tb check complexity'
 check-coverage = 'tb check coverage'
 check-prettier = 'tb check prettier'
+
+coverage-local.sequence = [
+    "comment-pytest-entry",
+    "uv-sync",
+    "check-coverage",
+    "restore-pytest-entry"
+]
+
 ci-checks.sequence = [
     'check-python',
     'check-types',
     'check-complexity',
-    'check-coverage',
+    'coverage-local',
     'check-prettier',
 ]
