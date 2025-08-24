@@ -28,6 +28,9 @@ metadata.allow-direct-references = true
 [tool.hatch.version]
 path = 'f3_nation_test_utils/version.py'
 
+[project.entry-points.pytest11]
+f3_nation_test_utils = "f3_nation_test_utils.pytest_f3_nation"
+
 [tool]
 toolbelt.include = ["@toolbelt:resources/presets/hdw.yaml"]
 poe.include = ["configs/tasks.toml"]
