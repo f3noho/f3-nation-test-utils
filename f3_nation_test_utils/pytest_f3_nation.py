@@ -1,8 +1,11 @@
-import pytest
 from collections.abc import Generator
+
+import pytest
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session, sessionmaker
+
 from f3_nation_test_utils.fixtures import create_test_db_from_defaults
+
 
 @pytest.fixture
 def f3_test_database() -> Generator[Engine, None, None]:
@@ -10,6 +13,7 @@ def f3_test_database() -> Generator[Engine, None, None]:
     engine = create_test_db_from_defaults()
     yield engine
     engine.dispose()
+
 
 @pytest.fixture
 def f3_test_session(f3_test_database: Engine) -> Generator[Session, None, None]:

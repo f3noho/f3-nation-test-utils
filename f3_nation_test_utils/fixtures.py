@@ -67,7 +67,8 @@ def create_test_db_from_defaults() -> Engine:
                     pkg_resources.files(_resource_pkg).joinpath(filename).open('r') as f,
                 ):
                     data = json.load(f)
-            except (FileNotFoundError, ModuleNotFoundError):
+            except (FileNotFoundError, ModuleNotFoundError):  # pragma: no cover
+                # Defensive: This should never happen in normal use, since resources are bundled with the library.
                 continue
             for row in data:
                 # Table and column names are controlled by the library, not user input
